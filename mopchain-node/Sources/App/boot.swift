@@ -19,17 +19,4 @@ public func boot(_ app: Application) throws {
     let peerService = try app.make(PeerService.self)
     let peers = try peerService.fetchNetworkPeersFromHub(in: app).wait()
     logger.info("Got peers: \(peers)")
-    
-    logger.info("Registering node with hub server...")
-    let status = try peerService.registerSelfOnHub(on: app).wait()
-    switch status {
-    case .ok:   logger.info("Registered successfully!")
-    default:    logger.error("Failed to register with hub server!")
-    }
-
-    logger.info("Alerting peers to presence...")
-    let db = try app.requestPooledConnection(to: .sqlite).wait()
-    peerService.registerSelfWithPeers(in: db) { peer, status in
-        logger.info("Registered with peer at " + peer.hostname + ":\(peer.port)" + " with status: \(status.reasonPhrase)")
-    }
 }

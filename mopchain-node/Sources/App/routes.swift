@@ -7,9 +7,7 @@ import Vapor
  */
 public func routes(_ router: Router) throws {
 
-    let transactionController = TransactionController()
-    router.post("transaction", use: transactionController.processTransaction)
-    
-    let chainController = BlockchainController()
-    router.post("chain", use: chainController.receive)
+    router.get("Hello") { req in
+        return "Testing..."
+    }
 }

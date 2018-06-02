@@ -33,8 +33,4 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     // Setup `PeerService`
     let peerService = PeerService()
     services.register(peerService)
-    
-    // Setup `BlockchainService`
-    let blockchainService = BlockchainService()
-    services.register(blockchainService)
 }
