@@ -51,8 +51,7 @@ fileprivate extension String {
     
     /** Hash a string with SHA 1 */
     func sha1Hash() -> String {
-        let hashData = try! SHA1.hash(self)
-        return String(data: hashData, encoding: .utf8)!
+        return try! SHA1.hash(self).base64EncodedString()
     }
 }
 
